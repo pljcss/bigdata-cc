@@ -15,6 +15,7 @@
         <module>spark1.6.0-cc</module>
         <module>zookeeper-cc</module>
         <module>kafka-cc</module>
+        <module>scala-cc</module>
     </modules>
 
 
