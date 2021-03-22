@@ -10,6 +10,8 @@ import java.io.IOException;
 /**
  * @author cs
  * @date 2020/11/18 2:57 下午
+ *
+ *      分组排序
  */
 public class OrderMapper extends Mapper<LongWritable, Text, OrderBean, NullWritable> {
 
@@ -18,6 +20,7 @@ public class OrderMapper extends Mapper<LongWritable, Text, OrderBean, NullWrita
     @Override
     protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
         // 获取一行
+        // 0000001 Pdt_01 222.8
         String line = value.toString();
         // 切割
         String[] fields = line.split(" ");

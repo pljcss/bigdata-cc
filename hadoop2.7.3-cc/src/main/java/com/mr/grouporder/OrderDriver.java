@@ -30,9 +30,12 @@ public class OrderDriver {
         job.setOutputValueClass(NullWritable.class);
 
         FileInputFormat.setInputPaths(job,
-                new Path("/Users/saicao/Desktop/tmp_del/mr/groupingcomparator_input"));
+                new Path("/Users/saicao/Desktop/tmp_del/mr/groupingcomparator_input/groupingcomparator.txt"));
         FileOutputFormat.setOutputPath(job,
                 new Path("/Users/saicao/Desktop/tmp_del/mr/groupingcomparator_output"));
+
+        // 设置reduce端分组
+        job.setGroupingComparatorClass(OrderGroupingComparator.class);
 
         boolean b = job.waitForCompletion(true);
         System.out.println(b);
