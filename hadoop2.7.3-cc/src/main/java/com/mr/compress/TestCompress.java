@@ -33,7 +33,45 @@ public class TestCompress {
 
     }
 
-    private static void decompress(String fileName) throws IOException {
+
+    /**
+     * 压缩
+     * @param fileName
+     * @param compressType
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
+    public static void compress(String fileName, String compressType)
+            throws IOException, ClassNotFoundException {
+
+        // 1、获取输入流
+        FileInputStream fis = new FileInputStream(fileName);
+
+        // 2、加载
+        Class<?> codecClass = Class.forName(compressType);
+        CompressionCodec codec = (CompressionCodec) ReflectionUtils.newInstance(codecClass, new Configuration());
+
+        // 2、获取输出流
+        FileOutputStream fos = new FileOutputStream(new File(fileName + codec.getDefaultExtension()));
+        // 获取具有压缩的输出流
+        CompressionOutputStream cos = codec.createOutputStream(fos);
+
+        // 3、流的拷贝
+        IOUtils.copyBytes(fis, cos, 1024 * 1024, false);
+
+        // 4、关闭资源
+        IOUtils.closeStream(cos);
+        IOUtils.closeStream(fos);
+        IOUtils.closeStream(fis);
+
+    }
+
+    /**
+     * 解压缩
+     * @param fileName
+     * @throws IOException
+     */
+    public static void decompress(String fileName) throws IOException {
         // 1、压缩方式检查
         CompressionCodecFactory codecFactory = new CompressionCodecFactory(new Configuration());
         CompressionCodec codec = codecFactory.getCodec(new Path(fileName));
@@ -60,28 +98,5 @@ public class TestCompress {
 
     }
 
-    private static void compress(String fileName, String compressType)
-            throws IOException, ClassNotFoundException {
 
-        // 1、获取输入流
-        FileInputStream fis = new FileInputStream(fileName);
-
-        // 2、加载
-        Class<?> codecClass = Class.forName(compressType);
-        CompressionCodec codec = (CompressionCodec) ReflectionUtils.newInstance(codecClass, new Configuration());
-
-        // 2、获取输出流
-        FileOutputStream fos = new FileOutputStream(new File(fileName + codec.getDefaultExtension()));
-        // 获取具有压缩的输出流
-        CompressionOutputStream cos = codec.createOutputStream(fos);
-
-        // 3、流的拷贝
-        IOUtils.copyBytes(fis, cos, 1024 * 1024, false);
-
-        // 4、关闭资源
-        IOUtils.closeStream(cos);
-        IOUtils.closeStream(fos);
-        IOUtils.closeStream(fis);
-
-    }
 }

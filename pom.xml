@@ -16,6 +16,8 @@
         <module>zookeeper-cc</module>
         <module>kafka-cc</module>
         <module>scala-cc</module>
+        <module>hbase1.4.13-cc</module>
+        <module>hive1.2.2-cc</module>
     </modules>
 
 

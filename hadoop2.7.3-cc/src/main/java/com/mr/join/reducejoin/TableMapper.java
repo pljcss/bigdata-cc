@@ -17,6 +17,9 @@ public class TableMapper extends Mapper<LongWritable, Text, Text, TableBean> {
     Text keyOut = new Text();
     TableBean tableBean = new TableBean();
 
+    /**
+     * Called once at the beginning of the task
+     */
     @Override
     protected void setup(Context context) throws IOException, InterruptedException {
         // 获取文件名称

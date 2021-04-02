@@ -38,6 +38,17 @@
             <artifactId>hadoop-hdfs</artifactId>
             <version>2.7.3</version>
         </dependency>
+
+
+        <!-- 解决找不包时，找不到包的问题 -->
+        <dependency>
+            <groupId>com.lzo.hehe</groupId>
+            <artifactId>com.dd</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${pom.basedir}/lib/hadoop-lzo-0.4.21-SNAPSHOT.jar</systemPath>
+        </dependency>
+
     </dependencies>
 
 

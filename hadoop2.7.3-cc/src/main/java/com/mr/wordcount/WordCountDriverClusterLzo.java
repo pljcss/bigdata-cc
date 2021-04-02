@@ -1,14 +1,10 @@
-package com.mr.compress;
+package com.mr.wordcount;
 
-import com.mr.wordcount.WordCountMapper;
-import com.mr.wordcount.WordCountReducer;
+import com.hadoop.mapreduce.LzoTextInputFormat;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
-import org.apache.hadoop.io.compress.BZip2Codec;
-import org.apache.hadoop.io.compress.CompressionCodec;
-import org.apache.hadoop.io.compress.GzipCodec;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
@@ -16,26 +12,20 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import java.io.IOException;
 
 /**
- * 开启map输出压缩
- *
  * @author cs
- * @date 2020/11/19 7:05 下午
+ * @date 2020/11/10 5:15 下午
+ *
+ * 读取输入文件格式是lzo的压缩文件
  */
-public class WordCountCompressDriver {
+public class WordCountDriverClusterLzo {
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
 
         Configuration conf = new Configuration();
-
-        // 开启map端输出压缩
-        conf.setBoolean("mapreduce.map.output.compress", true);
-        // 设置map端输出压缩方式
-        conf.setClass("mapreduce.map.output.compress.codec", BZip2Codec.class, CompressionCodec.class);
-
         // 获取job对象
         Job job = Job.getInstance(conf);
 
         // 设置jar存储位置
-        job.setJarByClass(WordCountCompressDriver.class);
+        job.setJarByClass(WordCountDriverClusterLzo.class);
 
         // 关联Map和Reduce类
         job.setMapperClass(WordCountMapper.class);
@@ -49,15 +39,13 @@ public class WordCountCompressDriver {
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
 
-        // 设置输入路径和输出路径
-        FileInputFormat.setInputPaths(job, new Path("/Users/saicao/Desktop/tmp_del/mr/input/"));
-        FileOutputFormat.setOutputPath(job, new Path("/Users/saicao/Desktop/tmp_del/mr/output_compress/"));
+        // 设置 InputFormat
+//        Class<?> aClass = Class.forName("com.hadoop.mapreduce.LzoTextInputFormat");
+        job.setInputFormatClass(LzoTextInputFormat.class);
 
-        // 设置 reduce端输出压缩开启
-        FileOutputFormat.setCompressOutput(job, true);
-        // 设置压缩方式
-//        FileOutputFormat.setOutputCompressorClass(job, BZip2Codec.class);
-        FileOutputFormat.setOutputCompressorClass(job, GzipCodec.class);
+        // 设置输入路径和输出路径
+        FileInputFormat.setInputPaths(job, new Path(args[0]));
+        FileOutputFormat.setOutputPath(job, new Path(args[1]));
 
 
         // 提交job
