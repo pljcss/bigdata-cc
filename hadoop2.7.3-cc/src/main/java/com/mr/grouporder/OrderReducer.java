@@ -15,7 +15,21 @@ public class OrderReducer extends Reducer<OrderBean, NullWritable, OrderBean, Nu
     protected void reduce(OrderBean key, Iterable<NullWritable> values, Context context)
             throws IOException, InterruptedException {
 
+        // 取 topN 就遍历几次
+//        int counter=0;
+//        for (NullWritable value : values) {
+//            if (counter <= 2) {
+//                context.write(key, NullWritable.get());
+//            }
+//
+//            counter++;
+//        }
+
+        System.out.println("---------------");
+
+        // 取 top1
         context.write(key, NullWritable.get());
+
 
     }
 }

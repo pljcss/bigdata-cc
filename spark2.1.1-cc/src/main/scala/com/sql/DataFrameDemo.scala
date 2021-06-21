@@ -16,10 +16,15 @@ object DataFrameDemo {
 //      .config("spark.some.config.option", "some-value")
       .getOrCreate()
 
-
     val df = spark.read.json("spark2.1.1-cc/input/people.json")
 
     df.show()
+    df.select("name").show()
+
+    // 注册临时表
+    df.createOrReplaceTempView("people")
+    // 使用SQL
+    spark.sql("select name,nvl(age,-1) from people").show()
 
 
   }

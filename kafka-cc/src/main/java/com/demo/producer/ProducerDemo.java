@@ -20,9 +20,9 @@ public class ProducerDemo {
         properties.load(resourceAsStream);
 
 
-        KafkaProducer<String, String> producer = new KafkaProducer<String, String>(properties);
+        KafkaProducer<String, String> producer = new KafkaProducer<>(properties);
 
-        producer.send(new ProducerRecord<String, String>("test111-topic", "one record 111111"));
+        producer.send(new ProducerRecord<>("test111-topic", "one record 111111"));
 
         producer.close();
 

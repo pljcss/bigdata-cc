@@ -1,5 +1,6 @@
 package com.core.transformation
 
+import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext}
 
 /**
@@ -15,7 +16,8 @@ object MapPartitionsDemo {
     val rdd = sc.makeRDD(List(1,2,3,4), numSlices = 2)
 
     // 乘2操作
-    val newRDD = rdd.mapPartitions(datas=>{
+    val newRDD: RDD[Int] = rdd.mapPartitions(datas=>{
+      println("--------")
       datas.map(elem=>elem*2)
     })
 

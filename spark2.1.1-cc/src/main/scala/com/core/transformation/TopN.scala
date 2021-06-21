@@ -6,6 +6,7 @@ import org.apache.spark.{SparkConf, SparkContext}
  * Author: cs
  * Date: 2020/12/16 9:59 上午
  * Desc: TopN
+ * 时间戳，省份，城市，用户，广告，中间字段使用空格分割
  */
 object TopN {
   def main(args: Array[String]): Unit = {

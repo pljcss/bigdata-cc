@@ -1,5 +1,6 @@
 package com.core.persist
 
+import org.apache.spark.rdd.RDD
 import org.apache.spark.storage.StorageLevel
 import org.apache.spark.{SparkConf, SparkContext}
 
@@ -13,13 +14,13 @@ object PersistDemo {
     val conf = new SparkConf().setMaster("local[*]").setAppName("PersistDemo APP")
     val sc = new SparkContext(conf)
 
-    val rdd = sc.makeRDD(List("hello world", "hello spark"), 3)
+    val rdd: RDD[String] = sc.makeRDD(List("hello world", "hello spark"), 3)
 
     // 扁平映射
-    val flatMapRDD = rdd.flatMap(_.split(" "))
+    val flatMapRDD: RDD[String] = rdd.flatMap(_.split(" "))
 
     // 结构转换
-    val mapRDD = flatMapRDD.map {
+    val mapRDD: RDD[(String, Int)] = flatMapRDD.map {
       word => {
         println("********")
         (word, 1)

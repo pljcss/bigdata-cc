@@ -9,15 +9,16 @@ import java.util.Arrays;
 import java.util.Properties;
 
 /**
- * 简单消费者
  * @author cs
  * @date 2020/11/1 1:44 下午
+ * 简单消费者
+ * 自动提交 offset
  */
-public class ConsumerDemo {
+public class ConsumerAutoCommit {
     public static void main(String[] args) {
         // 创建kafka消费者配置信息
         Properties props = new Properties();
-        props.put("bootstrap.servers", "localhost:9092");
+        props.put("bootstrap.servers", "192.168.5.3:9092");
         // 消费者
         props.setProperty("group.id", "test");
         // 开启自动提交
@@ -29,10 +30,10 @@ public class ConsumerDemo {
         props.setProperty("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
 
         // 创建消费者实例
-        KafkaConsumer<String, String> consumer = new KafkaConsumer<String, String>(props);
+        KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
 
         // 订阅topic
-        consumer.subscribe(Arrays.asList("test2-topic", "test2-topic"));
+        consumer.subscribe(Arrays.asList("hello-topic"));
 
         // 消费数据
         while (true) {

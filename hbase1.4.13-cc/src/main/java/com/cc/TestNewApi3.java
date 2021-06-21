@@ -123,6 +123,7 @@ public class TestNewApi3 {
 
         Scan scan = new Scan();
 
+
         try {
 
             // 扫描全表

@@ -17,7 +17,7 @@ import java.util.Properties;
 public class ConsumerDemo2 {
     public static void main(String[] args) {
         Properties props = new Properties();
-        props.put("bootstrap.servers", "localhost:9092");
+        props.put("bootstrap.servers", "192.168.5.3:9092");
         // 消费者组
         props.setProperty("group.id", "test333");
         // 自动提交
@@ -33,7 +33,7 @@ public class ConsumerDemo2 {
         KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
 
         // 订阅topic
-        consumer.subscribe(Arrays.asList("test2-topic", "test3-topic"));
+        consumer.subscribe(Arrays.asList("hello-topic", "hello-topic"));
 
         // 消费数据
         while (true) {

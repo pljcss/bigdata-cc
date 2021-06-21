@@ -33,11 +33,11 @@ public class ProducerDemo2 {
         props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 
         // 创建生产者对象
-        KafkaProducer<String, String> producer = new KafkaProducer<String, String>(props);
+        KafkaProducer<String, String> producer = new KafkaProducer<>(props);
 
         // 发送数据
         for (int i = 0; i < 15; i++) {
-            producer.send(new ProducerRecord<String, String>("test2-topic",
+            producer.send(new ProducerRecord<>("test2-topic",
 //                    Integer.toString(i),
                     "new message" + i));
             Thread.sleep(1*1000);
