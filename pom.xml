@@ -18,6 +18,7 @@
         <module>scala-cc</module>
         <module>hbase1.4.13-cc</module>
         <module>hive1.2.2-cc</module>
+        <module>flink1.13-cc</module>
     </modules>
 
 
