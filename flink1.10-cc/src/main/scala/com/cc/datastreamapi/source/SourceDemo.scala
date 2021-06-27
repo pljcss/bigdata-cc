@@ -34,7 +34,7 @@ object SourceDemo {
 //    val fileSource = env.readTextFile("/Users/saicao/IdeaProjects/bigdata-cc/flink1.10-cc/src/main/resources/sensor.txt")
 //    fileSource.print()
 //
-//    // 3、从文件读取
+//    // 3、从端口读取
 //    val socketSource = env.socketTextStream("localhost", 9999)
 //    socketSource.print()
 
