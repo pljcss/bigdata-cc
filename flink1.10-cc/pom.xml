@@ -24,6 +24,7 @@
             <version>1.10.0</version>
         </dependency>
 
+        <!-- 2.11是Scala版本，0.11是kafka版本，1.10.0是连接器的版本 -->
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-connector-kafka-0.11_2.11</artifactId>

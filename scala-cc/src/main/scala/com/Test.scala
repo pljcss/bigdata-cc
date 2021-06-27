@@ -20,6 +20,12 @@ object Test {
 
     println(ints)
 
+
+    // 高阶函数，f1的返回类型是函数
+    def f1(msg1:String) = (msg2:String) => print(msg1 + msg2)
+
+    f1("h1")("h2")
+
   }
 
 

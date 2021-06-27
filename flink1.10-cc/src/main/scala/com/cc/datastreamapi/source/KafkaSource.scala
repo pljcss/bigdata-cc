@@ -9,7 +9,7 @@ import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer011
 /**
  * Author: cs
  * Date: 2020/12/27 6:46 下午
- * Desc: 
+ * Desc: 从kafka读取数据
  */
 object KafkaSource {
   def main(args: Array[String]): Unit = {
@@ -21,6 +21,8 @@ object KafkaSource {
     properties.setProperty("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer")
     properties.setProperty("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer")
     properties.setProperty("auto.offset.reset", "latest")
+
+//    env.addSource() addSource()的入参是函数？？？？
 
     val kafkaSource = env.addSource(new FlinkKafkaConsumer011[String](
       "test111-topic",
